@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Data Migration";
+}
+
+
+@using FitnGlam.DataMigration;
+
+@{ 
+    var dropwodnData = Model;
+}
+
+<div class="container">
+    @using (Html.BeginForm("Upload", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row">
+            <div class="col-md-4">
+                <label>SelectFile</label>
+                <select name="SelectFile" class="dropdown" required>
+                    <option selected disabled hidden>Select an Option</option>
+                    @foreach (var keyvalue in dropwodnData)
+                    {
+                        <option value="@keyvalue.Key">@keyvalue.Value</option>
+                    }
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label>Upload File</label>
+                <input type="file" id="postedFile" name="postedFile" class="glyphicon-upload" readonly accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+            </div>
+            <div class="col-md-4">
+                <input type="submit" name="Upload" class="btn btn-primary" />
+            </div>
+        </div>
+    }
+</div>
